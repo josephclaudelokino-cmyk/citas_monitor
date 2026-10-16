@@ -219,15 +219,17 @@ def main() -> None:
             # Esperar a que el widget Angular cargue completamente
             page.wait_for_timeout(5000)
 
-            print("[Monitor] Página cargada. Analizando estado...")
-print(f"[Diagnóstico] Título: {page.title()}")
-try:
-    texto = page.locator("body").inner_text(timeout=5000)
-    print(f"[Diagnóstico] Texto visible: {texto[:1500]}")
-except Exception as exc:
-    print(f"[Diagnóstico] No se pudo leer el texto: {exc}")
 
-current_state = detect_state(page)
+            print("[Monitor] Página cargada. Analizando estado...")
+            print(f"[Diagnóstico] Título: {page.title()}")
+            try:
+                texto = page.locator("body").inner_text(timeout=5000)
+                print(f"[Diagnóstico] Texto visible: {texto[:1500]}")
+            except Exception as exc:
+                print(f"[Diagnóstico] No se pudo leer el texto: {exc}")
+
+            current_state = detect_state(page)
+
         except PlaywrightTimeout:
             print("[Monitor] ⚠️  Timeout al cargar la página.")
             current_state = "unknown"
